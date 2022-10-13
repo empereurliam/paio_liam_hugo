@@ -1,7 +1,6 @@
 # HackaGames UnitTest - `pytest`
 
-from operator import truediv
-import component as cpn
+import hackapy.component as cpn
 
 # ------------------------------------------------------------------------ #
 #         T E S T   H A C K A G A M E S - C O M P O N E N T
@@ -33,10 +32,10 @@ def test_Board_connection():
 - Cell-3 :
 - Edge-3 : [2]"""
 
-    assert board.edges(1) == [2]
-    assert board.edges(2) == [2, 3]
-    assert board.edges(3) == [2]
-
+    assert board.edgesFrom(1) == [2]
+    assert board.edgesFrom(2) == [2, 3]
+    assert board.edgesFrom(3) == [2]
+    
     assert board.isEdge(1, 2)
     assert board.isEdge(2, 2)
     assert board.isEdge(3, 2)

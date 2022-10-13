@@ -6,29 +6,28 @@ import sys, os, random
 import matplotlib.pyplot as plt
 
 # Local HackaGame:
-sys.path.insert(1, os.path.join(sys.path[0], '..'))
+sys.path.insert( 1, __file__.split('game421')[0] )
 import hackapy as hg
 
-def log( aString ):
-    print( aString )
-
 def main():
-    actions= []
-    for a1 in ['keep', 'roll']:
-        for a2 in ['keep', 'roll']:
-            for a3 in ['keep', 'roll']:
-                actions.append( a1+'-'+a2+'-'+a3 )
     print('let\'s go...')
-    player= PlayerRandom(actions)
+    player= PlayerRandom()
     results= player.takeASeat()
     print( f"Average: { float(sum(results))/len(results) }" )
     plotResults(results)
 
+def log( aString ):
+    print( aString )
+
 class PlayerRandom( hg.AbsPlayer ) :
 
-    def __init__(self, actions):
+    def __init__(self):
         super().__init__()
-        self.actions= actions
+        self.actions= []
+        for a1 in ['keep', 'roll']:
+            for a2 in ['keep', 'roll']:
+                for a3 in ['keep', 'roll']:
+                    self.actions.append( a1+'-'+a2+'-'+a3 )
     
     # Player interface :
     def wakeUp(self, playerId, numberOfPlayers, gameConf):
@@ -37,10 +36,10 @@ class PlayerRandom( hg.AbsPlayer ) :
 
     def perceive(self, gameState):
         elements= gameState.children()
-        self.horizon= elements[0].attribute(0)
+        self.horizon= elements[0].attribute(1)
         self.dices= elements[1].attributes()
         if len(elements) == 3 : # ie in duo mode
-            self.reference= elements[2].attribute(0)
+            self.reference= elements[2].attribute(1)
             log( f'H: {self.horizon} DICES: {self.dices} REF: {self.reference}' )
         else :
             log( f'H: {self.horizon} DICES: {self.dices}' )

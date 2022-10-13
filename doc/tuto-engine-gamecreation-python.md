@@ -6,7 +6,7 @@ Reminder, `hackapy` is the HackaGames python librairy helping for the game and p
 
 ## Directory structure 
 
-In your `HackaGame` directory create a subdirectory `game-XYZ` where `XYZ` identify your new game (`game-helo` for instance).
+In your `HackaGame` directory create a subdirectory `gameXyz` where `Xyz` identify your new game (`gameHelo` for instance).
 This new subdirectory (your working directory) will also include another subdirectory `gameEngine` regrouping the source code making your game working.
 
 Directory squeletom: 
@@ -16,7 +16,7 @@ HackaGames                 # Master directory
 - ...
 - hackapy                  # Python version of HackaGames lib.
 - ...
-- game-helo                # your game folder
+- gameHelo                # your game folder
   - gameEngine              # sourcecode of the game
 - ...
 ```
@@ -37,8 +37,9 @@ First, initialize python file and import the `hackapy` package.
 """
 HackaGame - Game - Hello 
 """
-import os, sys
-sys.path.insert(1, os.path.join(sys.path[0], '../..'))
+import sys
+
+sys.path.insert( 1, __file__.split('gameXyz')[0] )
 import hackapy as hg
 ```
 
@@ -100,7 +101,7 @@ game.start()
 
 That it. 
 
-You can set your script executable (`chmod +x ./game-XYZ/start`) and play with your new game (in tree different terminals): `./game-XYZ/start`, `./play` and `./play`
+You can set your script executable (`chmod +x ./gameXyz/start`) and play with your new game (in tree different terminals): `./gameXyz/start`, `./play` and `./play`
 
 
 ## Going futher: Command Interpreter:
@@ -110,7 +111,7 @@ import sys, os
 from gameEngine import GameHello
 
 # Local HackaGame:
-sys.path.insert(1, os.path.join(sys.path[0], '..'))
+sys.path.insert( 1, __file__.split('gameXyz')[0] )
 import hackapy as hg
 
 # Commands:
